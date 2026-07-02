@@ -68,8 +68,8 @@ module.exports = {
 		setTimeout(() => timestamps.delete(interaction.user.id), cooldownAmount);
 		try {
 			await cmd.execute(interaction, guild, user); // Выполняем команду
-			client.cmdsUsed++;
-			client.cmdsDetailed.set(cmd.data.name, (client.cmdsDetailed.get(cmd.data.name) || 0) + 1);
+			client.dailyStat.cmdsUsed++;
+			client.dailyStat.cmdsDetailed.set(cmd.data.name, (client.dailyStat.cmdsDetailed.get(cmd.data.name) || 0) + 1);
 		}
 		catch (error) {
 			client.logsManager.sendErrorLog(error, interaction);

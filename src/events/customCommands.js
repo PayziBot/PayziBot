@@ -27,6 +27,6 @@ module.exports = {
 		const answer = replaceVars(command.reply, { guild: message.guild, message });
 		message.reply(answer);
 		GiveAchievement(5, message.author.id, message.channel, guild)
-		client.cmdsUsed++;
+		client.dailyStat.cmdsUsed++;
 	},
 };

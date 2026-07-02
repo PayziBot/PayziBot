@@ -14,7 +14,7 @@ module.exports = {
 		const client = interaction.client;
 		const embed = new EmbedBuilder()
 			.setTitle(`PayziBot ${version}`)
-			.setDescription(`${emojis.arrow} Бот запущен <t:${(new Date()/1000).toFixed(0) - (client.uptime/1000).toFixed(0)}:R>\n${emojis.arrow} За день ${plural(client.cmdsUsed, "использована", "использовано", "использовано")} **${client.cmdsUsed} ${plural(client.cmdsUsed, "команда", "команды", "команд")}**`)
+			.setDescription(`${emojis.arrow} Бот запущен <t:${(new Date()/1000).toFixed(0) - (client.uptime/1000).toFixed(0)}:R>\n${emojis.arrow} За день ${plural(client.dailyStat.cmdsUsed, "использована", "использовано", "использовано")} **${client.dailyStat.cmdsUsed} ${plural(client.dailyStat.cmdsUsed, "команда", "команды", "команд")}**`)
 			.addFields(
 				{
 					name: 'Статистика',

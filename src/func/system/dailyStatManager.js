@@ -4,9 +4,10 @@ const fs = require('fs');
 const path = require('path');
 
 class dailyStatManager extends EventEmitter {
-    constructor(client) {
+    constructor() {
         super();
-        this.client = client;
+        this.cmdsUsed = 0;
+        this.cmdsDetailed = new Map();
     }
 
     async updateDailyStat() {
@@ -22,15 +23,15 @@ class dailyStatManager extends EventEmitter {
             dailyStat = await DailyStat.findOne({ date: dateString });
         }
 
-        dailyStat.commands.all = this.client.cmdsUsed;
-        dailyStat.commands.detailed = new Map(this.client.cmdsDetailed);
+        dailyStat.commands.all = this.cmdsUsed;
+        dailyStat.commands.detailed = new Map(this.cmdsDetailed);
 
         await dailyStat.save();
     }
 
     async clearClientDailyStats() {
-        this.client.cmdsUsed = 0;
-        this.client.cmdsDetailed.clear();
+        this.cmdsUsed = 0;
+        this.cmdsDetailed.clear();
     }
 
     async generatePreviousDayStatFile() {
@@ -69,8 +70,8 @@ class dailyStatManager extends EventEmitter {
             return;
         }
 
-        this.client.cmdsUsed = dailyStat.commands.all;
-        this.client.cmdsDetailed = new Map(dailyStat.commands.detailed);
+        this.cmdsUsed = dailyStat.commands.all;
+        this.cmdsDetailed = new Map(dailyStat.commands.detailed);
     }
 }
 

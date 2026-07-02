@@ -31,8 +31,8 @@ module.exports = {
 	// При уровне блокировки 2 и выше ограничиваем доступ
 	if(user.block >= 2) return;
 
-	client.cmdsUsed++;
-	client.cmdsDetailed.set(command, (client.cmdsDetailed.get(command) || 0) + 1);
+	client.dailyStat.cmdsUsed++;
+	client.dailyStat.cmdsDetailed.set(command, (client.dailyStat.cmdsDetailed.get(command) || 0) + 1);
 	
 	// Выполнение команды
 	cmd.run(client, message, args, guild, user);
