@@ -37,8 +37,6 @@ client.textCommands = new Collection();
 client.textAliases = new Collection();
 client.cooldowns = new Collection();
 client.autoreactChannels = [];
-client.cmdsUsed = 0;
-client.cmdsDetailed = new Map();
 
 const eventsPath = path.join(__dirname, 'src', 'events');
 const eventFiles = fs.readdirSync(eventsPath).filter(file => file.endsWith('.js'));
