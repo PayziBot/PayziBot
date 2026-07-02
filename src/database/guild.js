@@ -1,14 +1,15 @@
 const { Schema, model } = require('mongoose');
+const { colors } = require('../config.js');
 
 const guild = Schema({
 	guildID: String,
 	colors: {
-		basic: { type: String, default: '#3fcc65' },
-		error: { type: String, default: '#ff033e' },
-		correct: { type: String, default: '#008000' },
-		starboard: { type: String, default: '#cfc50d' },
-		giveaway: { type: String, default: '#9327e1' },
-		achievement: { type: String, default: '#7029f5' },
+		basic: { type: String, default: colors.basic },
+		error: { type: String, default: colors.error },
+		correct: { type: String, default: colors.success },
+		starboard: { type: String, default: colors.starboard },
+		giveaway: { type: String, default: colors.basic },
+		achievement: { type: String, default: colors.basic },
 	},
 	starboard: {
 		channelID: { type: String, default: '-1' },

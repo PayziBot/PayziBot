@@ -4,7 +4,7 @@ const { GiveawaysManager } = require('discord-giveaways');
 const fs = require('node:fs');
 const path = require('node:path');
 const mongoose = require('mongoose');
-const { channels } = require('./src/config.js');
+const { channels, colors } = require('./src/config.js');
 
 const Giveaway = require('./src/database/giveaway.js');
 
@@ -133,8 +133,8 @@ const GiveawayManagerWithOwnDatabase = class extends GiveawaysManager {
 const manager = new GiveawayManagerWithOwnDatabase(client, {
 	default: {
 		botsCanWin: false,
-		embedColor: '#9327e1',
-		embedColorEnd: '#9327e1',
+		embedColor: colors.basic,
+		embedColorEnd: colors.basic,
 		reaction: '🎉',
 	},
 });

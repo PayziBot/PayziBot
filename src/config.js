@@ -21,5 +21,11 @@ module.exports = {
 		github_star: '<:star:1238381503352803359>',
 		github_fork: '<:fork:1238381500748271677>',
 		exchange: '<:exchange:1315673012271321251>'
+	},
+	colors: {
+		basic: '#3FCC65',
+		error: '#CC3F3F',
+		success: '#60CC3F',
+		starboard: '#CCC73F'
 	}
 };

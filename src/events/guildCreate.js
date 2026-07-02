@@ -5,7 +5,7 @@ const {
   ButtonBuilder,
   ButtonStyle,
 } = require("discord.js");
-const { channels } = require("../config.js");
+const { channels, colors } = require("../config.js");
 
 module.exports = {
   name: Events.GuildCreate,
@@ -21,7 +21,7 @@ module.exports = {
           guild.createdTimestamp / 1000
         ).toFixed(0)}:D> (<t:${(guild.createdTimestamp / 1000).toFixed(0)}:R>)`
       )
-      .setColor("#3fcc65")
+      .setColor(colors.success)
       .setFooter({
         text: `ID: ${guild.id}`,
       });
@@ -42,7 +42,7 @@ module.exports = {
         .setDescription(
           "Для просмотра списка команд введите: `/help`\n\nПри возникновении вопросов или проблем, обратитесь на [сервер поддержки](https://discord.gg/E7SFuVEB2Z)\n\nПодробное описание команд и функций вы можете найти в [документации](https://docs.payzibot.ru/)"
         )
-        .setColor("#3fcc65")
+        .setColor(colors.basic)
         .setFooter({
           text: "Сообщение отправлено, поскольку бот был добавлен на сервер",
         });
