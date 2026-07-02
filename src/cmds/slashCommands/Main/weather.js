@@ -79,7 +79,7 @@ module.exports = {
       });
 
     if (r.current.air_quality["us-epa-index"] >= 2) {
-      CheckAch(18, interaction.user.id, interaction.channel, guild, user)
+      CheckAch(18, interaction.user.id, interaction.channel, guild)
     }
 
     const threedaysweather = new ButtonBuilder()
