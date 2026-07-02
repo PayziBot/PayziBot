@@ -1,6 +1,6 @@
 const { Events } = require('discord.js');
 const Guild = require('../database/guild.js');
-const { CheckAch } = require('../func/games/giveAch.js');
+const { GiveAchievement } = require('../func/games/giveAch.js');
 const { replaceVars } = require('../func/system/variables.js');
 
 module.exports = {
@@ -26,7 +26,7 @@ module.exports = {
 		if (!command.reply) return;
 		const answer = replaceVars(command.reply, { guild: message.guild, message });
 		message.reply(answer);
-		CheckAch(5, message.author.id, message.channel, guild)
+		GiveAchievement(5, message.author.id, message.channel, guild)
 		client.cmdsUsed++;
 	},
 };

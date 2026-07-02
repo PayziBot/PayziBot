@@ -1,6 +1,6 @@
 const { SlashCommandBuilder } = require('discord.js');
 const { Minesweeper } = require('../../../func/discord-gamecord');
-const { CheckAch } = require('../../../func/games/giveAch.js');
+const { GiveAchievement } = require('../../../func/games/giveAch.js');
 
 module.exports = {
 	category: 'games',
@@ -39,7 +39,7 @@ module.exports = {
 
 		Game.on('gameOver', result => {
 			if(result.result == 'win') {
-				CheckAch(0, interaction.user.id, interaction.channel, guild, user)
+				GiveAchievement(0, interaction.user.id, interaction.channel, guild, user)
 			}
 		  });
 	},

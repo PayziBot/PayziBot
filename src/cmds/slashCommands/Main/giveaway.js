@@ -2,7 +2,7 @@ const { SlashCommandBuilder, ChannelType } = require('discord.js');
 const ms = require('../../../func/ms.js');
 const messages = require('../../../games_src/giveaways/messages.js');
 const giveaway = require('../../../database/giveaway.js');
-const { CheckAch } = require('../../../func/games/giveAch.js');
+const { GiveAchievement } = require('../../../func/games/giveAch.js');
 const { emojis } = require('../../../config.js');
 const { getLevelGuild, getLevelUserByGuild } = require('../../../database/levels.js');
 
@@ -120,7 +120,7 @@ module.exports = {
 					}
 				}).then((data) => {
 					interaction.editReply(`${emojis.gift} | Розыгрыш начался. ID розыгрыша: \`${data.messageId}\`\n-# Сохраните ID для выбора нового победителя или досрочного окончания`)
-					CheckAch(8, interaction.user.id, interaction.channel, guild)
+					GiveAchievement(8, interaction.user.id, interaction.channel, guild)
 				}).catch((err) => {
 					console.log(err)
 					interaction.editReply(`${emojis.error} | Неизвестная ошибка`)

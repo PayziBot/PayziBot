@@ -1,5 +1,5 @@
 const { SlashCommandBuilder } = require("discord.js");
-const { CheckAch } = require('../../../func/games/giveAch.js');
+const { GiveAchievement } = require('../../../func/games/giveAch.js');
 const { emojis } = require('../../../config.js');
 
 const { RsnChat } = require('rsnchat');
@@ -31,7 +31,7 @@ module.exports = {
   async execute(interaction, guild) {
     await interaction.deferReply();
 
-    CheckAch(14, interaction.user.id, interaction.channel, guild)
+    GiveAchievement(14, interaction.user.id, interaction.channel, guild)
 
     const model = interaction.options.getString('модель');
     const text = interaction.options.getString('запрос');

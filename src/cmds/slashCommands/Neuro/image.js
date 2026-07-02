@@ -1,5 +1,5 @@
 const { SlashCommandBuilder } = require("discord.js");
-const { CheckAch } = require('../../../func/games/giveAch.js');
+const { GiveAchievement } = require('../../../func/games/giveAch.js');
 const { emojis } = require('../../../config.js');
 
 const { RsnChat } = require('rsnchat');
@@ -40,7 +40,7 @@ module.exports = {
                 content: `🖼️ Вот ваша замечательная картинка!\n-# Запрос: ${text.replace('`', '\`')}`,
                 files: [{ attachment: image, name: 'image.png' }]
             })
-            CheckAch(9, interaction.user.id, interaction.channel, guild, user)
+            GiveAchievement(9, interaction.user.id, interaction.channel, guild, user)
         }
 
         if (model === 'flux') {

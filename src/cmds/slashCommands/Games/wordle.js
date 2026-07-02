@@ -1,6 +1,6 @@
 const { SlashCommandBuilder, EmbedBuilder, ButtonBuilder, ButtonStyle, ActionRowBuilder } = require('discord.js');
 const { emojis } = require('../../../config.js');
-const { CheckAch } = require('../../../func/games/giveAch.js');
+const { GiveAchievement } = require('../../../func/games/giveAch.js');
 
 const words = require('../../../games_src/wordle.json');
 
@@ -86,7 +86,7 @@ module.exports = {
 
 			if (guess === game.word) {
 				gameWon(interaction, game, response, guild);
-				CheckAch(16, interaction.user.id, interaction.channel, guild, user);
+				GiveAchievement(16, interaction.user.id, interaction.channel, guild, user);
 				games.delete(interaction.channelId);
 				messageCollector.stop();
 				collector.stop();

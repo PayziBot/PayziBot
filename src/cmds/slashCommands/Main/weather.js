@@ -7,7 +7,7 @@ const {
 } = require("discord.js");
 const { emojis } = require("../../../config.js");
 const weather = require("../../../func/apis/weather.js");
-const { CheckAch } = require('../../../func/games/giveAch.js');
+const { GiveAchievement } = require('../../../func/games/giveAch.js');
 
 const dayNames = [
   "Воскресенье",
@@ -79,7 +79,7 @@ module.exports = {
       });
 
     if (r.current.air_quality["us-epa-index"] >= 2) {
-      CheckAch(18, interaction.user.id, interaction.channel, guild)
+      GiveAchievement(18, interaction.user.id, interaction.channel, guild)
     }
 
     const threedaysweather = new ButtonBuilder()
