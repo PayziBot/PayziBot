@@ -67,7 +67,7 @@ module.exports = {
 
 			let text = user.ach.map(id => {
 				const achievement = ach.find(x => x.id === id);
-				return achievement ? `${achievement.badge} | ${achievement.name}` : '';
+				return achievement ? `${achievement.badge} | ${achievement.translatable.ru.title}` : '';
 			}).join("\n");
 			const ach_embed = new EmbedBuilder()
 			.setTitle(`Достижения ${_user.username}`)

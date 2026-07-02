@@ -22,7 +22,7 @@ async function SendMess(ach, id, channel, g) {
 
 	const embed = new EmbedBuilder()
   .setTitle("Новое достижение!")
-  .setDescription(`Получено достижение: **${ach_list[ach].name}** (${ach_list[ach].description})`)
+  .setDescription(`Получено достижение: **${ach_list[ach].translatable.ru.title}** (${ach_list[ach].translatable.ru.description})`)
   .setColor(g.colors.achievement)
   .setFooter({
     text: "Все достижения по кнопке ниже ⬇️",

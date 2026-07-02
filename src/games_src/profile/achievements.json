@@ -1,133 +1,285 @@
 [
     {
-        "name": "Сапёр!",
-        "description": "Выиграйте первую игру в Сапёре",
+        "translatable": {
+            "ru": {
+                "title": "Сапёр!",
+                "description": "Выиграйте первую игру в Сапёре"
+            },
+            "en": {
+                "title": "Minesweeper!",
+                "description": "Win your first game in Minesweeper"
+            }
+        },
         "created": "14.12.2023",
         "badge": "🚩",
         "id": 0
     },
     {
-        "name": "Путешественник",
-        "description": "Угадайте 50 городов",
+        "translatable": {
+            "ru": {
+                "title": "Путешественник",
+                "description": "Угадайте 50 городов"
+            },
+            "en": {
+                "title": "Traveler",
+                "description": "Guess 50 cities"
+            }
+        },
         "created": "14.12.2023",
         "badge": "🏠",
         "id": 1
     },
     {
-        "name": "Длинный змей",
-        "description": "Достигните счёта **50** в змейке",
+        "translatable": {
+            "ru": {
+                "title": "Длинный змей",
+                "description": "Достигните счёта **50** в змейке"
+            },
+            "en": {
+                "title": "Long Snake",
+                "description": "Reach a score of **50** in Snake"
+            }
+        },
         "created": "14.12.2023",
         "badge": "🐍",
         "id": 2
     },
     {
-        "name": "Расшифровка...",
-        "description": "Получите текст из фотографии",
+        "translatable": {
+            "ru": {
+                "title": "Расшифровка...",
+                "description": "Получите текст из фотографии"
+            },
+            "en": {
+                "title": "Decoding...",
+                "description": "Get text from a photo"
+            }
+        },
         "created": "14.12.2023",
         "badge": "🤖",
         "id": 3
     },
     {
-        "name": "Звёздный",
-        "description": "Попадите в звёздную доску",
+        "translatable": {
+            "ru": {
+                "title": "Звёздный",
+                "description": "Попадите в звёздную доску"
+            },
+            "en": {
+                "title": "Starred",
+                "description": "Hit the starboard"
+            }
+        },
         "created": "14.12.2023",
         "badge": "⭐",
         "id": 4
     },
     {
-        "name": "А это на сервере",
-        "description": "Используйте кастомную команду",
+        "translatable": {
+            "ru": {
+                "title": "А это на сервере",
+                "description": "Используйте кастомную команду"
+            },
+            "en": {
+                "title": "My custom command...",
+                "description": "Use a custom command"
+            }
+        },
         "created": "20.12.2023",
         "badge": "🔗",
         "id": 5
     },
     {
-        "name": "Новый 2024 год!",
-        "description": "Спасибо, что оставались с нами в 2023 году! С новым годом! 🎄⛄🎉",
+        "translatable": {
+            "ru": {
+                "title": "Новый 2024 год!",
+                "description": "Спасибо, что оставались с нами в 2023 году! С новым годом! 🎄⛄🎉"
+            },
+            "en": {
+                "title": "New Year 2024!",
+                "description": "Thank you for staying with us in 2023! Happy New Year! 🎄⛄🎉"
+            }
+        },
         "created": "20.12.2023",
         "badge": "🎄",
         "id": 6
     },
     {
-        "name": "Без изменений...",
-        "description": "Посмотрите список изменений",
+        "translatable": {
+            "ru": {
+                "title": "Без изменений...",
+                "description": "Посмотрите список изменений"
+            },
+            "en": {
+                "title": "No Changes...",
+                "description": "Check the list of changes"
+            }
+        },
         "created": "02.01.2024",
         "badge": "💖",
         "id": 7
     },
     {
-        "name": "Дарю подарки",
-        "description": "Проведите розыгрыш",
+        "translatable": {
+            "ru": {
+                "title": "Дарю подарки",
+                "description": "Проведите розыгрыш"
+            },
+            "en": {
+                "title": "Gifter",
+                "description": "Host a giveaway"
+            }
+        },
         "created": "02.01.2024",
         "badge": "🎁",
         "id": 8
     },
     {
-        "name": "Нейрокартинки",
-        "description": "Сгенерируйте картинку",
+        "translatable": {
+            "ru": {
+                "title": "Нейрокартинки",
+                "description": "Сгенерируйте картинку"
+            },
+            "en": {
+                "title": "AI images",
+                "description": "Generate a picture"
+            }
+        },
         "created": "16.01.2024",
         "badge": "🖼️",
         "id": 9
     },
     {
-        "name": "ГеоГессер",
-        "description": "Угадайте 111 стран",
+        "translatable": {
+            "ru": {
+                "title": "ГеоГессер",
+                "description": "Угадайте 111 стран"
+            },
+            "en": {
+                "title": "GeoGuesser",
+                "description": "Guess 111 countries"
+            }
+        },
         "created": "16.01.2024",
         "badge": "🚗",
         "id": 10
     },
     {
-        "name": "2048",
-        "description": "Набрать счет 2048 в 2048",
+        "translatable": {
+            "ru": {
+                "title": "2048",
+                "description": "Набрать счет 2048 в 2048"
+            },
+            "en": {
+                "title": "2048",
+                "description": "Reach a score of 2048 in 2048"
+            }
+        },
         "created": "24.04.2024",
         "badge": "🎲",
         "id": 11
     },
     {
-        "name": "Сотка",
-        "description": "Достичь 100 уровня",
+        "translatable": {
+            "ru": {
+                "title": "Сотка",
+                "description": "Достичь 100 уровня"
+            },
+            "en": {
+                "title": "Hundred",
+                "description": "Reach level 100"
+            }
+        },
         "created": "25.11.2024",
         "badge": "💯",
         "id": 12
     },
     {
-        "name": "Happy New Year 2025!",
-        "description": "Рады, что Вы провели 2024-й год с нами. С новым 2025 годом! 🎄🎁🎉",
+        "translatable": {
+            "ru": {
+                "title": "Happy New Year 2025!",
+                "description": "Рады, что Вы провели 2024-й год с нами. С новым 2025 годом! 🎄🎁🎉"
+            },
+            "en": {
+                "title": "Happy New Year 2025!",
+                "description": "We are glad you spent 2024 with us. Happy New Year 2025! 🎄🎁🎉"
+            }
+        },
         "created": "18.12.2024",
         "badge": "🎅",
         "id": 13
     },
     {
-        "name": "Кругом нейросети",
-        "description": "Использовать команду /ask",
+        "translatable": {
+            "ru": {
+                "title": "Кругом нейросети",
+                "description": "Использовать команду /ask"
+            },
+            "en": {
+                "title": "AI is everywhere",
+                "description": "Use the /ask command"
+            }
+        },
         "created": "11.08.2025",
         "badge": "🫣",
         "id": 14
     },
     {
-        "name": "Welcome to 2026!",
-        "description": "2025 год закончился. Благодарим, что Вы оставались с нами!",
+        "translatable": {
+            "ru": {
+                "title": "Welcome to 2026!",
+                "description": "2025 год закончился. Благодарим, что Вы оставались с нами!"
+            },
+            "en": {
+                "title": "Welcome to 2026!",
+                "description": "The year 2025 has ended. Thank you for staying with us!"
+            }
+        },
         "created": "19.12.2025",
         "badge": "❄️",
         "id": 15
     },
     {
-        "name": "🟩🟩🟩🟩🟩",
-        "description": "Выиграть игру в Wordle",
+        "translatable": {
+            "ru": {
+                "title": "🟩🟩🟩🟩🟩",
+                "description": "Выиграть игру в Wordle"
+            },
+            "en": {
+                "title": "🟩 x5",
+                "description": "Win a game of Wordle"
+            }
+        },
         "created": "11.05.2026",
         "badge": "🟩",
         "id": 16
     },
     {
-        "name": "Лучшая память",
-        "description": "Найдите все пары в /memory менее чем за 2 минуты",
+        "translatable": {
+            "ru": {
+                "title": "Лучшая память",
+                "description": "Найдите все пары в /memory менее чем за 2 минуты"
+            },
+            "en": {
+                "title": "Best Memory",
+                "description": "Find all pairs in /memory in less than 2 minutes"
+            }
+        },
         "created": "14.05.2026",
         "badge": "🥇",
         "id": 17
     },
     {
-        "name": "Загрязнённый воздух",
-        "description": "Найдите город с загрязненным воздухом",
+        "translatable": {
+            "ru": {
+                "title": "Загрязнённый воздух",
+                "description": "Найдите город с загрязненным воздухом"
+            },
+            "en": {
+                "title": "Polluted Air",
+                "description": "Find a city with polluted air"
+            }
+        },
         "created": "24.06.2026",
         "badge": "🥲",
         "id": 18

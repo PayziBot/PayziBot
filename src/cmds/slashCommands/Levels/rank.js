@@ -2,7 +2,6 @@ const { SlashCommandBuilder, EmbedBuilder, ButtonBuilder, ButtonStyle, ActionRow
 const create = require('../../../func/levelCard.js');
 const User = require('../../../database/user.js');
 const block = require('../../../games_src/profile/block.json');
-const ach = require('../../../games_src/profile/achievements.json');
 const { emojis } = require('../../../config.js');
 const fs = require('fs');
 const { join } = require('path');
