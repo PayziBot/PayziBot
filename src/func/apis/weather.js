@@ -11,8 +11,8 @@ async function current(key, city) {
 
 async function forecast(key, city, days) {
     let answer;
-    await fetch(`http://api.weatherapi.com/v1/forecast.json?key=${key}&q=${encodeURIComponent(city)}&lang=ru&days=${days}`).then(r => r.json()).then(r => {
-        answer = r.forecast.forecastday;
+    await fetch(`http://api.weatherapi.com/v1/forecast.json?key=${key}&q=${encodeURIComponent(city)}&lang=ru&days=${days}&aqi=yes`).then(r => r.json()).then(r => {
+        answer = r;
     }).catch(e => {
         console.log(e);
         answer = 'error';
