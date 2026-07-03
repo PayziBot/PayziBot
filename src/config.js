@@ -9,18 +9,18 @@ module.exports = {
 	},
 	emojis: { // Эмодзи, которые будут использоваться в командах
 		// Эмодзи в /userinfo надо настраивать в файле cmds/slashCommands/Main/userinfo.js
-		arrow: '<:arrow:1140937463209152572>',
-		error: '<:no:1107254682100957224>',
-		loading: '<a:loading:673777314584199169>',
-		gift: '<:Gift:1189196716373725235>',
+		arrow: '<:arrow:1522466289199874108>',
+		error: '<:no:1522467330230194268>',
+		loading: '<:loading:1522467578839306260>',
+		gift: '<:gift:1522467770040717403>',
 		members: '<:member:732128945365057546>',
 		channels: '<:channel:732125684259881052>',
-		success: '<:yes:1107254746336735312>',
+		success: '<:yes:1522467214593233006>',
 		timeout: '<:timeout_clock:1134453176091824250>',
 		announcement: '<:announcement:732128155195801641>',
-		github_star: '<:star:1238381503352803359>',
-		github_fork: '<:fork:1238381500748271677>',
-		exchange: '<:exchange:1315673012271321251>'
+		github_star: '<:star:1522468184500862986>',
+		github_fork: '<:fork:1522468239282671736>',
+		exchange: '<:exchange:1522469091183694036>'
 	},
 	colors: {
 		basic: '#3FCC65',
