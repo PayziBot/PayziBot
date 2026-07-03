@@ -23,7 +23,7 @@
 - PayziBot является форком [oxenedBot](https://github.com/oxened/oxenedbot)
 - Большинство игр сделаны с помощью [gamecord](https://github.com/aniket091/Gamecord)
 - Виселица создана с помощью [discord-hangman](https://github.com/SimonLeclere/discord-hangman)
-- Система розыгрышей создана через [discord-giveaways](https://github.com/SimonLeclere/discord-hangman)
+- Система розыгрышей создана через [discord-giveaways](https://github.com/Androz2091/discord-giveaways)
 
 ## Помощь и соавторы
 
