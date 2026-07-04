@@ -1,20 +1,24 @@
 async function getServer(ip) {
-    await fetch(`https://api.mcstatus.io/v2/status/java/${encodeURIComponent(ip)}`).then(r => r.json()).then(r => {
+    try {
+        const res = await fetch(`https://api.mcstatus.io/v2/status/java/${encodeURIComponent(ip)}`);
+        const r = await res.json();
         return r;
-    }).catch(e => {
+    }
+    catch (e) {
         console.log(e);
         return 'error';
-    });
+    }
 }
 
 async function getPlayer(name) {
-    let answer;
-    await fetch(`https://playerdb.co/api/player/minecraft/${name}`).then(r => r.json()).then(r => {
+    try {
+        const res = await fetch(`https://playerdb.co/api/player/minecraft/${name}`);
+        const r = await res.json();
         return r;
-    }).catch(e => {
-        console.log(e);
+    }
+    catch (e) {
         return 'error';
-    });
+    }
 }
 
 
