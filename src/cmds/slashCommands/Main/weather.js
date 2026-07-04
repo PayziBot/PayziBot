@@ -160,7 +160,7 @@ module.exports = {
             },
             {
               "type": 10,
-              "content": `Влажность: **${current.humidity}%**\nВетер: **${(current.wind_kph / 3.6).toFixed(1)} м/с**\nДавление: **${current.pressure_mb} мм рт. ст.**\nВероятность осадков: **${current.chance_of_rain || current.chance_of_snow || 0} %**\nКачество воздуха: **${airQuality[current.air_quality["us-epa-index"]]}**`
+              "content": `Влажность: **${current.humidity}%**\nВетер: **${(current.wind_kph / 3.6).toFixed(1)} м/с**\nДавление: **${(current.pressure_mb/1.333).toFixed(0)} мм рт. ст.**\nВероятность осадков: **${current.chance_of_rain || current.chance_of_snow || 0} %**\nКачество воздуха: **${airQuality[current.air_quality["us-epa-index"]]}**`
             },
             {
               "type": 10,
