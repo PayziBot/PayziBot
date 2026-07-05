@@ -29,6 +29,7 @@ async function createLevelGuild(guildID) {
         },
         channelID: "-1",
         messageEnabled: true,
+        clearLevels: "none", // none, banned, leaved
         message: "🎉 Поздравляем, {user.mention}, вы достигли **{level}** уровня!",
         roles: [], // {roleId, level, cleanable}, {}
         data: [] // {user, xp, level, lastMessage}, {}
@@ -61,6 +62,20 @@ async function getLevelGuild(guildID) {
 async function setLevelGuildEnabled(guildID, status) {
     const guild = await getLevelGuild(guildID);
     guild.enabled = status;
+    levelsDB.put(guildID, guild);
+
+    return true;
+}
+
+/**
+ * Установить удаление уровней для вышедших/забаненных пользователей
+ * 
+ * @param {string} guildID 
+ * @param {boolean} status 
+ */
+async function setClearLevelsStatus(guildID, status) {
+    const guild = await getLevelGuild(guildID);
+    guild.clearLevels = status;
     levelsDB.put(guildID, guild);
 
     return true;
@@ -211,6 +226,19 @@ async function setLevelUserByGuild(guildID, userID) {
 }
 
 /**
+ * Удаление информации о пользователе на сервере
+ * 
+ * @param {string} guildID 
+ * @param {string} userID 
+ */
+async function removeLevelUserByGuild(guildID, userID) {
+    let guild = await getLevelGuild(guildID);
+    guild.data = guild.data.filter(data => data.user !== userID);
+    levelsDB.put(guildID, guild);
+    return guild;
+}
+
+/**
  * Установить минимальное и максимальное значение xp за сообщение на сервере
  * 
  * @param {string} guildID 
@@ -239,7 +267,9 @@ module.exports = {
     resetLevelUser,
     getLevelUserByGuild,
     setLevelUserByGuild,
+    removeLevelUserByGuild,
     getRolesByLevelRange,
     addRoleLevel,
-    setLevelGuildXp
+    setLevelGuildXp,
+    setClearLevelsStatus
 }
