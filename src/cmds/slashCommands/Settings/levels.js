@@ -120,7 +120,7 @@ module.exports = {
         subcommand
           .setName('clear-levels')
           .setDescription('Установить, очищается ли уровень при выходе с сервера/блокировке')
-          .addIntegerOption(option =>
+          .addStringOption(option =>
             option.setName('очищать')
               .setDescription('За что очищать уровень?')
               .setRequired(true)
@@ -289,7 +289,7 @@ module.exports = {
 
       if(!g.enabled) return interaction.reply(`${emojis.error} | На сервере отключена система уровней. Для включения используйте команду \`/levels toggle\``);
 
-      const isClear = interaction.options.getInteger('очищать');
+      const isClear = interaction.options.getString('очищать');
 
       await setClearLevelsStatus(interaction.guild.id, isClear);
 
