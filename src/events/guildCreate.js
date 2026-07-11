@@ -37,24 +37,54 @@ module.exports = {
       );
       if (!channel) return;
 
-      const embed = new EmbedBuilder()
-        .setTitle("Благодарим за добавление PayziBot на сервер!")
-        .setDescription(
-          "Для просмотра списка команд введите: `/help`\n\nПри возникновении вопросов или проблем, обратитесь на [сервер поддержки](https://discord.gg/E7SFuVEB2Z)\n\nПодробное описание команд и функций вы можете найти в [документации](https://docs.payzibot.ru/)"
-        )
-        .setColor(colors.basic)
-        .setFooter({
-          text: "Сообщение отправлено, поскольку бот был добавлен на сервер",
-        });
+      const message = {
+        "flags": 32768,
+        "components": [
+          {
+            "type": 17,
+            "components": [
+              {
+                "type": 12,
+                "items": [
+                  {
+                    "media": {
+                      "url": "https://u.fifty.su/img/payzibot/welcome"
+                    }
+                  }
+                ]
+              },
+              {
+                "type": 10,
+                "content": "# Основной функционал бота:\n- **Мини-игры**: виселица, найди пару, \"угадайте\", сапер, змейка и множество других игр\n- **Система розыгрышей**\n- **Система уровней**\n- Автореакты, автопубликация объявлений, **роли за реакции**, приветственные и прощальные сообщения, **звездная доска**\n- **Погода**, информация о Minecraft-сервере, курс валют\n\n## Все возможности по команде `/help`"
+              },
+              {
+                "type": 1,
+                "components": [
+                  {
+                    "type": 2,
+                    "style": 5,
+                    "label": "Сервер поддержки",
+                    "url": "https://discord.gg/E7SFuVEB2Z"
+                  },
+                  {
+                    "type": 2,
+                    "style": 5,
+                    "label": "Панель управления (скоро)",
+                    "url": "https://discord.com",
+                    "disabled": true
+                  }
+                ]
+              },
+              {
+                "type": 10,
+                "content": "-# Сообщение отправлено, поскольку бот был добавлен на сервер"
+              }
+            ]
+          }
+        ]
+      };
 
-      const support = new ButtonBuilder()
-        .setLabel("Сервер поддержки")
-        .setURL("https://discord.gg/E7SFuVEB2Z")
-        .setStyle(ButtonStyle.Link);
-
-      const row = new ActionRowBuilder().addComponents(support);
-
-      await channel.send({ embeds: [embed], components: [row] });
+      await channel.send(message);
     }
   },
 };
