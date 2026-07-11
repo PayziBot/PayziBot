@@ -13,7 +13,7 @@
 
 const { SlashCommandBuilder, PermissionFlagsBits, ChannelType, ModalBuilder, TextInputBuilder, TextInputStyle, ButtonBuilder, ButtonStyle, ActionRowBuilder } = require("discord.js");
 const { emojis } = require('../../../config.js');
-const { setLevelGuildXp, setLevelGuildEnabled, resetLevelUser, getLevelGuild, setLevelGuildChannel, getLevelUserByGuild, putLevelUser, MathNextLevel, addRoleLevel, setLevelGuildInterval } = require('../../../database/levels.js');
+const { setLevelGuildXp, setLevelGuildEnabled, resetLevelUser, getLevelGuild, setLevelGuildChannel, getLevelUserByGuild, putLevelUser, MathNextLevel, addRoleLevel, setLevelGuildInterval, setClearLevelsStatus } = require('../../../database/levels.js');
 
 module.exports = {
   category: 'settings',
@@ -115,7 +115,20 @@ module.exports = {
             .setName('фикс')
             .setDescription('Фиксированное количество XP за сообщение')
             .setMinValue(1)
-            .setMaxValue(1000))),
+            .setMaxValue(1000)))
+      .addSubcommand(subcommand => 
+        subcommand
+          .setName('clear-levels')
+          .setDescription('Установить, очищается ли уровень при выходе с сервера/блокировке')
+          .addIntegerOption(option =>
+            option.setName('очищать')
+              .setDescription('За что очищать уровень?')
+              .setRequired(true)
+              .addChoices(
+                { name: 'не очищать.', value: 'none' },
+                { name: 'за выход с сервера', value: 'leaved' },
+                { name: 'при блокировке пользователя', value: 'banned' },
+              ))),
   async execute(interaction, guild) {
     const g = await getLevelGuild(interaction.guild.id);
 
@@ -270,6 +283,23 @@ module.exports = {
       await setLevelGuildXp(interaction.guild.id, min, max);
 
       interaction.reply(`${emojis.success} С этого момента за каждое сообщение пользователи будут получать от **${min}** до **${max}** XP!`)
+
+      // clear-levels
+    } else if (interaction.options.getSubcommand() === 'clear-levels') {
+
+      if(!g.enabled) return interaction.reply(`${emojis.error} | На сервере отключена система уровней. Для включения используйте команду \`/levels toggle\``);
+
+      const isClear = interaction.options.getInteger('очищать');
+
+      await setClearLevelsStatus(interaction.guild.id, isClear);
+
+      if(isClear === 'banned') {
+        interaction.reply(`${emojis.success} С этого момента у пользователей будет очищаться уровень, если его заблокируют`);
+      } else if(isClear === 'leaved') {
+        interaction.reply(`${emojis.success} С этого момента у пользователей будет очищаться уровень, если он выйдет с сервера или его заблокируют`);
+      } else {
+        interaction.reply(`${emojis.success} С этого момента у пользователей НЕ будет очищаться уровень, если он выйдет с сервера или его заблокируют`);
+      }
     }
   },
 };
