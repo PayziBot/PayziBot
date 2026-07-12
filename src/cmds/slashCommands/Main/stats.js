@@ -41,7 +41,7 @@ module.exports = {
 			.setStyle(ButtonStyle.Link);
 		const link_button4 = new ButtonBuilder()
 			.setLabel("Исходный код")
-			.setURL("https://github.com/Payziii/PayziBot/")
+			.setURL("https://github.com/PayziBot/PayziBot/")
 			.setStyle(ButtonStyle.Link);
 		
 		const row = new ActionRowBuilder()

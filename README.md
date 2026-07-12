@@ -4,7 +4,7 @@
 
 ## Установка и запуск
 
-1. Введите в консоль `git clone https://github.com/Payziii/PayziBot.git` для клонирования репозитория и `cd PayziBot` для перехода в папку с ботом
+1. Введите в консоль `git clone https://github.com/PayziBot/PayziBot.git` для клонирования репозитория и `cd PayziBot` для перехода в папку с ботом
 2. Установите необходимые пакеты командой `npm install`
 3. Создайте файл .env и введите туда ваши данные по примеру [.env.example](./.env.example)
 4. Измените [config.js](./src/config.js)
