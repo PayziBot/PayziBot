@@ -8,7 +8,7 @@ module.exports = {
 	category: 'levels',
 	data: new SlashCommandBuilder()
 		.setName('leaders')
-		.setDescription('Посмотреть список лидеров'),
+		.setDescription('Посмотреть таблицу лидеров'),
 	async execute(interaction, guild) {
 		await interaction.deferReply();
 		
