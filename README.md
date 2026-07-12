@@ -14,7 +14,7 @@
 ## Ссылки
 
 - Добавить бота: [Кликни](https://discord.com/api/oauth2/authorize?client_id=576442351426207744&permissions=1411299798102&scope=bot)
-- Сайт: [Кликни](https://payzibot.ru)
+- Сайт: [Кликни](https://payzibot.app)
 - Сервер поддержки: [Кликни](https://discord.gg/E7SFuVEB2Z)
 - Бот на мониторингах: [Boticord](https://boticord.top/bot/payzibot) [SD.C](https://bots.server-discord.com/576442351426207744) [Top.GG](https://top.gg/bot/576442351426207744)
 

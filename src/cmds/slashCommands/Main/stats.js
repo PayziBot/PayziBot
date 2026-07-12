@@ -37,7 +37,7 @@ module.exports = {
 			.setStyle(ButtonStyle.Link);
 		const link_button3 = new ButtonBuilder()
 			.setLabel("Сайт")
-			.setURL("https://payzibot.ru/")
+			.setURL("https://payzibot.app/")
 			.setStyle(ButtonStyle.Link);
 		const link_button4 = new ButtonBuilder()
 			.setLabel("Исходный код")
