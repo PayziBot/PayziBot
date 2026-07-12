@@ -32,10 +32,6 @@ module.exports = {
 					name: 'Система уровней',
 					value: `${Array.from(client.commands.filter(c => c.category === 'levels')).map(([key, value]) => `\`${key}\``).join(', ') || "Команды не найдены"}`,
 				},
-				{
-					name: 'Нейросети',
-					value: `${Array.from(client.commands.filter(c => c.category === 'neuro')).map(([key, value]) => `\`${key}\``).join(', ') || "Команды не найдены"}`,
-				},
 			)
 			.setThumbnail(`https://cdn.discordapp.com/avatars/${interaction.client.user.id}/${interaction.client.user.avatar}.webp?size=4096`)
 			.setColor(guild.colors.basic)
