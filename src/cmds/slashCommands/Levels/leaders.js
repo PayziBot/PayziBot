@@ -26,7 +26,7 @@ module.exports = {
 
 		const top10 = users.slice(0, 10);
 
-		let lvlMess = '';
+		let lvlMess = '## Таблица лидеров\n';
 		let userPosition = null;
 
 		for (let i = 0; i < users.length; i++) {
@@ -37,7 +37,7 @@ module.exports = {
 		}
 
 		top10.forEach((user, index) => {
-			lvlMess += `${index == 0 ? '🥇' : index == 1 ? '🥈' : index == 2 ? '🥉' : `${index + 1}. `} <@${user.user}> — Уровень: **${user.level}** — XP: **${user.xp}**\n`;
+			lvlMess += `${index == 0 ? '🥇' : index == 1 ? '🥈' : index == 2 ? '🥉' : `${index + 1}. `} <@${user.user}> — Уровень: **${user.level}** | XP: **${user.xp}**\n`;
 		});
 
 		if (top10.length === 0) {
@@ -46,15 +46,34 @@ module.exports = {
 
 		if (userPosition) {
 			if (userPosition <= 10) {
-				lvlMess += `\n➡️ Вы на **${userPosition}** месте`;
+				lvlMess += `\n-# ➡️ Вы на **${userPosition}** месте`;
 			} else {
-				lvlMess += `\n➡️ Ваша позиция: **${userPosition}**`;
+				lvlMess += `\n-# ➡️ Ваша позиция: **${userPosition}**`;
 			}
 		} else {
-			lvlMess += `\n➡️ Вы ещё не набирали опыт на этом сервере.`;
+			lvlMess += `\n-# ➡️ Вы ещё не набирали опыт на этом сервере.`;
 		}
 
-		const allowedMentions = { parse: ['users'], repliedUser: false };
-		await interaction.editReply({ content: lvlMess, allowedMentions });
+		const message = {
+			"flags": 32768,
+			"allowed_mentions": {
+				"parse": [
+					"users"
+				]
+			},
+			"components": [
+				{
+					"type": 17,
+					"components": [
+						{
+							"type": 10,
+							"content": lvlMess
+						}
+					]
+				}
+			]
+		};
+
+		await interaction.editReply(message);
 	},
 };
