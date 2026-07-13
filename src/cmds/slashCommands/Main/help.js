@@ -36,7 +36,7 @@ module.exports = {
 			.setThumbnail(`https://cdn.discordapp.com/avatars/${interaction.client.user.id}/${interaction.client.user.avatar}.webp?size=4096`)
 			.setColor(guild.colors.basic)
 			.setFooter({
-				text: 'Больше информации на docs.payzibot.ru',
+				text: 'Больше информации на docs.payzibot.app',
 			});
 		await interaction.editReply({ embeds: [embed] });
 	},
