@@ -3,6 +3,7 @@ const { channels } = require('../config.js');
 const BoticordService = require('../func/system/boticord.js');
 const dailyStatManager = require('../func/system/dailyStatManager.js');
 const logsManager = require('../func/system/logsManager.js');
+const { sendToBoticord, sendToSDC, sendToTopGG } = require('../func/system/sendServerStat.js');
 const { GiveReward } = require('../func/system/upAdded.js');
 const cron = require('node-cron');
 
@@ -17,19 +18,21 @@ module.exports = {
 		client.dailyStat = new dailyStatManager();
 		client.dailyStat.loadTodayStatToClient();
 
-		if(!process.env.BOTICORD_API_KEY) return console.log('Boticord service is not loaded. Please add boticord token in .env file')
-		
-		const boticord = new BoticordService(process.env.BOTICORD_API_KEY);
+		if (process.env.BOTICORD_API_KEY) {
+			const boticord = new BoticordService(process.env.BOTICORD_API_KEY);
 
-		boticord.connect();
+			boticord.connect();
 
-		boticord.on("notify", data => {
-			if(data.type != 'up_added') return;
-			GiveReward(data.user)
-			client.channels.cache.get(channels.dbLogs)
-			.send(`${data.user} поднял бота!`)
-			.catch(() => console.log(`ERROR | Failed to send bot boost message to log channel`))
-		})
+			boticord.on("notify", data => {
+				if (data.type != 'up_added') return;
+				GiveReward(data.user)
+				client.channels.cache.get(channels.dbLogs)
+					.send(`${data.user} поднял бота!`)
+					.catch(() => console.log(`ERROR | Failed to send bot boost message to log channel`))
+			})
+		} else {
+			console.log('Boticord service is not loaded. Please add boticord token in .env file');
+		}
 
 		cron.schedule('*/15 * * * *', () => {
 			client.dailyStat.updateDailyStat();
@@ -38,6 +41,12 @@ module.exports = {
 		cron.schedule('0 0 * * *', () => {
 			client.dailyStat.clearClientDailyStats();
 			client.dailyStat.generatePreviousDayStatFile();
+		});
+
+		cron.schedule('0 * * * *', () => {
+			if(process.env.BOTICORD_API_KEY) sendToBoticord(process.env.BOTICORD_API_KEY, client);
+			if(process.env.SDC_API_KEY) sendToSDC(process.env.SDC_API_KEY, client);
+			if(process.env.TOPGG_API_KEY) sendToTopGG(process.env.TOPGG_API_KEY, client);
 		});
 
 		client.dailyStat.on("statGenerated", (filePath) => {
