@@ -14,7 +14,7 @@ async function GiveAchievement(achievement, user_id, channel, guild, u) {
 async function SendAchievementMessage(achievement, user_id, channel, guild) {
 	const ach_link = new ButtonBuilder()
 		.setLabel('Все достижения')
-		.setURL('https://docs.payzibot.app/first-steps/achievements')
+		.setURL('https://docs.payzibot.app/ru/fun/achievements')
 		.setStyle(ButtonStyle.Link);
 
 	const row = new ActionRowBuilder()
