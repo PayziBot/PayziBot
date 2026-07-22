@@ -1,4 +1,4 @@
-const { SlashCommandBuilder, EmbedBuilder } = require('discord.js');
+const { SlashCommandBuilder, EmbedBuilder, ButtonBuilder, ButtonStyle, ActionRowBuilder } = require('discord.js');
 
 module.exports = {
 	category: 'utility',
@@ -8,6 +8,15 @@ module.exports = {
 	async execute(interaction, guild) {
 		await interaction.deferReply();
 		const client = interaction.client;
+
+		const ach_link = new ButtonBuilder()
+			.setLabel('Описание команд')
+			.setURL('https://docs.payzibot.app/ru/commands/games/')
+			.setStyle(ButtonStyle.Link);
+
+		const row = new ActionRowBuilder()
+			.addComponents(ach_link);
+
 		const embed = new EmbedBuilder()
 			.setTitle('Список доступных команд')
 			.setDescription('Бот использует слэш-команды. Для вызова команды введите `/команда`')
@@ -36,8 +45,8 @@ module.exports = {
 			.setThumbnail(`https://cdn.discordapp.com/avatars/${interaction.client.user.id}/${interaction.client.user.avatar}.webp?size=4096`)
 			.setColor(guild.colors.basic)
 			.setFooter({
-				text: 'Больше информации на docs.payzibot.app',
+				text: 'Больше информации по кнопке ниже',
 			});
-		await interaction.editReply({ embeds: [embed] });
+		await interaction.editReply({ embeds: [embed], components: [row] });
 	},
 };
