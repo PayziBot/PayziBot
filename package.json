@@ -4,21 +4,28 @@
   "description": "it's me!",
   "main": "index.js",
   "scripts": {
-    "start": "node index.js"
+    "start": "node index.js",
+    "api": "node api/server.js"
   },
   "author": "Payziii",
   "license": "GNU GENERAL PUBLIC LICENSE",
   "dependencies": {
     "@napi-rs/canvas": "^0.1.97",
+    "cookie-parser": "^1.4.7",
+    "cors": "^2.8.5",
     "discord-giveaways": "^6.0.1",
     "discord.js": "^14.27.0",
     "dotenv": "^16.3.1",
+    "express": "^4.21.2",
+    "express-rate-limit": "^7.5.0",
     "googletrans": "^1.0.28",
+    "jsonwebtoken": "^9.0.2",
     "lmdb": "^3.0.12",
     "mongoose": "^7.8.9",
     "node-cron": "^3.0.3",
     "tesseract.js": "^7.0.0",
-    "undici": "^6.21.0"
+    "undici": "^6.21.0",
+    "zod": "^3.24.1"
   },
   "devDependencies": {
     "eslint": "^8.53.0"
