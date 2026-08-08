@@ -16,7 +16,7 @@ module.exports = {
         `Название: **${guild.name}**\nУчастников: **${
           guild.memberCount
         }**\nВладелец: **${
-          guild.members.cache.get(guild.ownerId).user.username
+          guild.members.cache.get(guild.ownerId)?.user?.username
         }** (${guild.ownerId})\n\nСервер создан: <t:${(
           guild.createdTimestamp / 1000
         ).toFixed(0)}:D> (<t:${(guild.createdTimestamp / 1000).toFixed(0)}:R>)`
