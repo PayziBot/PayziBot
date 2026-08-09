@@ -7,6 +7,17 @@ const { GiveAchievement } = require('../../../func/games/giveAch.js');
 const { emojis } = require('../../../config.js');
 const { getLevelGuild } = require('../../../database/levels.js');
 
+function parseDuration(str) {
+	const parts = str.trim().split(/\s+/);
+	let total = 0;
+	for (const part of parts) {
+		const val = ms(part);
+		if (!val || isNaN(val)) return NaN;
+		total += val;
+	}
+	return total;
+}
+
 module.exports = {
 	category: 'main',
 	data: new SlashCommandBuilder()
@@ -47,9 +58,9 @@ module.exports = {
 				return interaction.reply(`${emojis.error} | \`${reaction}\` не является эмодзи.`);
 			}
 
-			const duration = ms(durationStr);
+			const duration = parseDuration(durationStr);
 			if (isNaN(duration) || duration < 20000) {
-				return interaction.reply(`${emojis.error} | Укажите корректное время. Пример: \`1д\`, \`2ч\`, \`30м\`, \`60с\`\n\nМинимальное время: 20 секунд`);
+				return interaction.reply(`${emojis.error} | Укажите корректное время. Примеры: \`1д\`, \`2ч 30м\`, \`1д 12ч\`\n\nМинимальное время: 20 секунд`);
 			}
 
 			if (!channel.permissionsFor(interaction.user).has('SendMessages')) {
