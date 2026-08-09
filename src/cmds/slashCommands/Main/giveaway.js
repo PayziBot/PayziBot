@@ -48,8 +48,8 @@ module.exports = {
 			}
 
 			const duration = ms(durationStr);
-			if (isNaN(duration) || duration < 1000) {
-				return interaction.reply(`${emojis.error} | Укажи корректное время. Пример: \`1д\`, \`2ч\`, \`30м\`, \`60с\``);
+			if (isNaN(duration) || duration < 20000) {
+				return interaction.reply(`${emojis.error} | Укажите корректное время. Пример: \`1д\`, \`2ч\`, \`30м\`, \`60с\`\n\nМинимальное время: 20 секунд`);
 			}
 
 			if (!channel.permissionsFor(interaction.user).has('SendMessages')) {
