@@ -69,13 +69,13 @@ module.exports = {
     await interaction.deferReply();
     // Подкоманда: Просмотр настроек РзР
     if (interaction.options.getSubcommand() === 'overview') {
-      if(guild.rr.size < 1) return interaction.followUp(`${emojis.error} | На этом сервере не установлены роли за реакции!`);
-      
+      if (guild.rr.size < 1) return interaction.followUp(`${emojis.error} | На этом сервере не установлены роли за реакции!`);
+
       const text = [...guild.rr.entries()]
         .map(([messageId, reactions]) => {
           return reactions.map(r => {
             return r.channelID ? `https://discord.com/channels/${interaction.guild.id}/${r.channelID}/${messageId}: <@&${r.role}> за ${r.emoji}`
-            : `\`${messageId}\`: <@&${r.role}> за ${r.emoji}`;
+              : `\`${messageId}\`: <@&${r.role}> за ${r.emoji}`;
           }).join('\n');
         })
         .join('\n');
@@ -86,7 +86,7 @@ module.exports = {
           parse: []
         }
       });
-    // Подкоманда: Удаление РзР
+      // Подкоманда: Удаление РзР
     } else if (interaction.options.getSubcommand() === "delete") {
       id = interaction.options.getString("id");
 
@@ -112,6 +112,10 @@ module.exports = {
       id = interaction.options.getString("id");
       channel = interaction.options.getChannel("канал");
 
+      if (!id || id.trim() === '' || !/^\d{17,20}$/.test(id)) {
+        return interaction.followUp(`${emojis.error} | Некорректный id сообщения`);
+      }
+
       // Проверяем роль и права
       const bot = interaction.guild.members.me;
       if (role == undefined) return interaction.followUp("Роли не существует?");
@@ -120,7 +124,7 @@ module.exports = {
       if (role.tags?.botId) return interaction.followUp("Это роль бота");
       if (role.tags?.premiumSubscriberRole) return interaction.followUp("Это роль бустера, ее нельзя выдать");
       if (role.tags?.integrationId || role.managed) return interaction.followUp("Данная роль управляется интеграцией");
-      if(role.id == interaction.guild.id) return interaction.reply(`${emojis.error} | Вы не можете установить роль everyone!`);
+      if (role.id == interaction.guild.id) return interaction.reply(`${emojis.error} | Вы не можете установить роль everyone!`);
 
       if (/\p{Emoji}/u.test(react) == false)
         return interaction.followUp(
