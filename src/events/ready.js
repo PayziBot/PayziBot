@@ -35,7 +35,7 @@ module.exports = {
 			console.log('Boticord service is not loaded. Please add boticord token in .env file');
 		}
 
-		cron.schedule('* * * * *', () => {
+		cron.schedule('*/30 * * * * *', () => {
 			checkExpiredGiveaways(client);
 		});
 
