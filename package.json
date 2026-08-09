@@ -13,7 +13,6 @@
     "@napi-rs/canvas": "^0.1.97",
     "cookie-parser": "^1.4.7",
     "cors": "^2.8.5",
-    "discord-giveaways": "^6.0.1",
     "discord.js": "^14.27.0",
     "dotenv": "^16.3.1",
     "express": "^4.21.2",

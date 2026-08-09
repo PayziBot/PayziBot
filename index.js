@@ -1,12 +1,9 @@
 require('dotenv').config();
 const { Client, GatewayIntentBits, Collection, ActivityType, Partials } = require('discord.js');
-const { GiveawaysManager } = require('discord-giveaways');
 const fs = require('node:fs');
 const path = require('node:path');
 const mongoose = require('mongoose');
 const { channels, colors } = require('./src/config.js');
-
-const Giveaway = require('./src/database/giveaway.js');
 
 const client = new Client({
 	intents: [
@@ -107,37 +104,5 @@ client.on('ready', async () => {
 		console.error(error);
 	}
 });
-
-const GiveawayManagerWithOwnDatabase = class extends GiveawaysManager {
-	async getAllGiveaways() {
-		return await Giveaway.find().lean().exec();
-	}
-
-	async saveGiveaway(messageId, giveawayData) {
-		await Giveaway.create(giveawayData);
-		return true;
-	}
-
-	async editGiveaway(messageId, giveawayData) {
-		await Giveaway.updateOne({ messageId }, giveawayData).exec();
-		return true;
-	}
-
-	async deleteGiveaway(messageId) {
-		await Giveaway.deleteOne({ messageId }).exec();
-		return true;
-	}
-};
-
-const manager = new GiveawayManagerWithOwnDatabase(client, {
-	default: {
-		botsCanWin: false,
-		embedColor: colors.basic,
-		embedColorEnd: colors.basic,
-		reaction: '🎉',
-	},
-});
-
-client.giveawaysManager = manager;
 
 client.login(process.env.DISCORD_BOT_TOKEN);

@@ -2,6 +2,7 @@ const { Events } = require('discord.js');
 const { channels } = require('../config.js');
 const BoticordService = require('../func/system/boticord.js');
 const dailyStatManager = require('../func/system/dailyStatManager.js');
+const { checkExpiredGiveaways } = require('../func/giveaways/manager.js');
 const logsManager = require('../func/system/logsManager.js');
 const { sendToBoticord, sendToSDC, sendToTopGG } = require('../func/system/sendServerStat.js');
 const { GiveReward } = require('../func/system/upAdded.js');
@@ -33,6 +34,10 @@ module.exports = {
 		} else {
 			console.log('Boticord service is not loaded. Please add boticord token in .env file');
 		}
+
+		cron.schedule('* * * * *', () => {
+			checkExpiredGiveaways(client);
+		});
 
 		cron.schedule('*/15 * * * *', () => {
 			client.dailyStat.updateDailyStat();
