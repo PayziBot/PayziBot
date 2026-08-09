@@ -105,7 +105,7 @@ module.exports = class Connect4 extends approve {
     .setTitle(this.options.embed.title)
     .setDescription(this.getBoardContent())
     .addFields({ name: this.options.embed.statusTitle, value: this.getTurnMessage() })
-    .setFooter({ text: `${this.message.author.tag} vs ${this.opponent.tag}` })
+    .setFooter({ text: `${this.message.author.tag} против ${this.opponent.tag}` })
 
 
     const btn1 = new ButtonBuilder().setStyle(this.options.buttonStyle).setEmoji('1️⃣').setCustomId('connect4_1');
@@ -164,7 +164,7 @@ module.exports = class Connect4 extends approve {
       .setTitle(this.options.embed.title)
       .setDescription(this.getBoardContent())
       .addFields({ name: this.options.embed.statusTitle, value: this.getTurnMessage() })
-      .setFooter({ text: `${this.message.author.tag} vs ${this.opponent.tag}` })
+      .setFooter({ text: `${this.message.author.tag} против ${this.opponent.tag}` })
 
       return await msg.edit({ embeds: [embed], components: msg.components });
     })
@@ -188,7 +188,7 @@ module.exports = class Connect4 extends approve {
     .setTitle(this.options.embed.title)
     .setDescription(this.getBoardContent())
     .addFields({ name: this.options.embed.statusTitle, value: this.getTurnMessage(result + 'Message') })
-    .setFooter({ text: `${this.message.author.tag} vs ${this.opponent.tag}` })
+    .setFooter({ text: `${this.message.author.tag} против ${this.opponent.tag}` })
 
     return msg.edit({ embeds: [embed], components: disableButtons(msg.components) });
   }
