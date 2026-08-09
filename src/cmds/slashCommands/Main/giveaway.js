@@ -68,6 +68,7 @@ module.exports = {
 		),
 	async execute(interaction, guild) {
 		if (interaction.options.getSubcommand() === 'start') {
+			return await interaction.reply(`${emojis.error} | Создание розыгрышей временно отключено в связи с изменением системы розыгрышей`)
 
 			channel = interaction.options.getChannel('канал') || interaction.channel;
 			duration = interaction.options.getString('время');
