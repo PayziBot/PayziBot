@@ -1,8 +1,7 @@
 const { SlashCommandBuilder, ChannelType } = require('discord.js');
 const ms = require('../../../func/ms.js');
-const { startGiveaway } = require('../../../func/giveaways/manager.js');
+const { startGiveaway, endGiveaway, rerollGiveaway, buildListMessage, PAGE_SIZE } = require('../../../func/giveaways/manager.js');
 const Giveaway = require('../../../database/giveaway.js');
-const { endGiveaway, rerollGiveaway } = require('../../../func/giveaways/manager.js');
 const { GiveAchievement } = require('../../../func/games/giveAch.js');
 const { emojis } = require('../../../config.js');
 const { getLevelGuild } = require('../../../database/levels.js');
@@ -39,6 +38,9 @@ module.exports = {
 		.addSubcommand(sub =>
 			sub.setName('reroll').setDescription('Выбрать новых победителей')
 				.addStringOption(o => o.setName('айди').setDescription('ID сообщения розыгрыша').setRequired(true)),
+		)
+		.addSubcommand(sub =>
+			sub.setName('list').setDescription('Список розыгрышей на сервере'),
 		),
 
 	async execute(interaction, guild) {
@@ -115,6 +117,14 @@ module.exports = {
 			await interaction.reply(`${emojis.loading} | Выбор новых победителей...`);
 			await rerollGiveaway(doc._id, interaction.client);
 			return interaction.editReply(`${emojis.success} | Новые победители выбраны!`);
+		}
+		if (sub === 'list') {
+			const all = await Giveaway.find({ 'meta.guildId': interaction.guild.id }).sort({ startAt: -1 });
+			if (!all.length) return interaction.reply({ content: `${emojis.error} | На этом сервере нет розыгрышей!`, ephemeral: true });
+
+			const totalPages = Math.ceil(all.length / PAGE_SIZE);
+			const slice = all.slice(0, PAGE_SIZE);
+			return interaction.reply(buildListMessage(slice, 1, totalPages, interaction.guild.id));
 		}
 	},
 };

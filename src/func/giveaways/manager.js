@@ -64,6 +64,35 @@ function buildEndedMessage(giveaway) {
 	};
 }
 
+const PAGE_SIZE = 15;
+
+function buildListMessage(giveaways, page, totalPages, guildId) {
+	const lines = giveaways.map((g, i) => {
+		const num = (page - 1) * PAGE_SIZE + i + 1;
+		const url = `https://discord.com/channels/${guildId}/${g.meta.channelId}/${g.meta.messageId}`;
+		const status = g.ended
+			? '(завершён)'
+			: `(завершится <t:${Math.floor(g.endAt / 1000)}:R>)`;
+		return `${num}. ${url} — **${g.prize}** ${status}`;
+	});
+
+	const content = `## Список розыгрышей\n\n${lines.join('\n')}`;
+	const inner = [{ type: 10, content }];
+
+	if (totalPages > 1) {
+		inner.push({
+			type: 1,
+			components: [
+				{ type: 2, style: 2, label: '◀️', custom_id: `galist_prev_${page}_${guildId}`, disabled: page === 1 },
+				{ type: 2, style: 2, label: `${page}/${totalPages}`, custom_id: `galist_page_${page}_${guildId}`, disabled: true },
+				{ type: 2, style: 2, label: '▶️', custom_id: `galist_next_${page}_${guildId}`, disabled: page === totalPages },
+			],
+		});
+	}
+
+	return { flags: FLAGS_V2, components: [{ type: 17, components: inner }] };
+}
+
 function buildControlMessage(giveaway) {
 	const id = giveaway._id.toString();
 	const button = giveaway.ended
@@ -167,4 +196,4 @@ async function checkExpiredGiveaways(client) {
 	}
 }
 
-module.exports = { buildActiveMessage, buildEndedMessage, buildControlMessage, startGiveaway, endGiveaway, rerollGiveaway, checkExpiredGiveaways };
+module.exports = { buildActiveMessage, buildEndedMessage, buildControlMessage, buildListMessage, PAGE_SIZE, startGiveaway, endGiveaway, rerollGiveaway, checkExpiredGiveaways };

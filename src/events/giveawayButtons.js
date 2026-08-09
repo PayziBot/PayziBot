@@ -1,6 +1,6 @@
 const { Events } = require('discord.js');
 const Giveaway = require('../database/giveaway.js');
-const { buildActiveMessage, buildControlMessage, endGiveaway, rerollGiveaway } = require('../func/giveaways/manager.js');
+const { buildActiveMessage, buildControlMessage, buildListMessage, PAGE_SIZE, endGiveaway, rerollGiveaway } = require('../func/giveaways/manager.js');
 const { getLevelUserByGuild } = require('../database/levels.js');
 const { emojis } = require('../config.js');
 
@@ -72,6 +72,21 @@ module.exports = {
 			await interaction.deferUpdate();
 			await rerollGiveaway(id, client);
 			return;
+		}
+
+		if (customId.startsWith('galist_prev_') || customId.startsWith('galist_next_')) {
+			const parts = customId.split('_');
+			const dir = parts[1];
+			const currentPage = parseInt(parts[2]);
+			const guildId = parts.slice(3).join('_');
+
+			const newPage = dir === 'prev' ? currentPage - 1 : currentPage + 1;
+
+			const all = await Giveaway.find({ 'meta.guildId': guildId }).sort({ startAt: -1 });
+			const totalPages = Math.ceil(all.length / PAGE_SIZE);
+			const slice = all.slice((newPage - 1) * PAGE_SIZE, newPage * PAGE_SIZE);
+
+			return interaction.update(buildListMessage(slice, newPage, totalPages, guildId));
 		}
 	},
 };
