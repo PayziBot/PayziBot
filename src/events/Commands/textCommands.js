@@ -1,7 +1,7 @@
 const { Events } = require('discord.js');
-const Guild = require('../database/guild.js');
-const User = require('../database/user.js');
-const { emojis } = require('../config.js');
+const Guild = require('../../database/guild.js');
+const User = require('../../database/user.js');
+const { emojis } = require('../../config.js');
 
 module.exports = {
 	name: Events.MessageCreate,

@@ -5,7 +5,7 @@ const {
   ButtonBuilder,
   ButtonStyle,
 } = require("discord.js");
-const { getLevelGuild, removeLevelUserByGuild } = require('../database/levels.js');
+const { getLevelGuild, removeLevelUserByGuild } = require('../../database/levels.js');
 
 module.exports = {
   name: Events.GuildMemberRemove,

@@ -1,7 +1,7 @@
 const { Events } = require('discord.js');
-const Guild = require('../database/guild.js');
-const { GiveAchievement } = require('../func/games/giveAch.js');
-const { replaceVars } = require('../func/system/variables.js');
+const Guild = require('../../database/guild.js');
+const { GiveAchievement } = require('../../func/games/giveAch.js');
+const { replaceVars } = require('../../func/system/variables.js');
 
 module.exports = {
 	name: Events.MessageCreate,

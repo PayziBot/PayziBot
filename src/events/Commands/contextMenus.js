@@ -1,5 +1,5 @@
 const { Events } = require('discord.js');
-const { emojis } = require('../config.js');
+const { emojis } = require('../../config.js');
 
 module.exports = {
 	name: Events.InteractionCreate,

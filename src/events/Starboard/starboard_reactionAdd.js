@@ -1,6 +1,6 @@
 const { Events, EmbedBuilder } = require('discord.js');
-const Guild = require('../database/guild.js');
-const { GiveAchievement } = require('../func/games/giveAch.js');
+const Guild = require('../../database/guild.js');
+const { GiveAchievement } = require('../../func/games/giveAch.js');
 
 module.exports = {
 	name: Events.MessageReactionAdd,

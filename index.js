@@ -37,18 +37,21 @@ client.cooldowns = new Collection();
 client.autoreactChannels = [];
 
 const eventsPath = path.join(__dirname, 'src', 'events');
-const eventFiles = fs.readdirSync(eventsPath).filter(file => file.endsWith('.js'));
-
-for (const file of eventFiles) {
-	const filePath = path.join(eventsPath, file);
-	const event = require(filePath);
-	if (event.once) {
-		client.once(event.name, (...args) => event.execute(...args, client));
+fs.readdirSync(eventsPath).forEach((folder) => {
+	const folderPath = path.join(eventsPath, folder);
+	if (!fs.statSync(folderPath).isDirectory()) return;
+	const eventFiles = fs.readdirSync(folderPath).filter(file => file.endsWith('.js'));
+	for (const file of eventFiles) {
+		const filePath = path.join(folderPath, file);
+		const event = require(filePath);
+		if (event.once) {
+			client.once(event.name, (...args) => event.execute(...args, client));
+		}
+		else {
+			client.on(event.name, (...args) => event.execute(...args, client));
+		}
 	}
-	else {
-		client.on(event.name, (...args) => event.execute(...args, client));
-	}
-}
+});
 
 fs.readdir('./src/cmds/textCommands/', (err, files) => {
 	if (err) console.log(err);

@@ -1,8 +1,8 @@
 const { Events, Collection } = require('discord.js');
-const Guild = require('../database/guild.js');
-const User = require('../database/user.js');
-const { channels, emojis } = require('../config.js');
-const { GiveAchievement } = require('../func/games/giveAch.js');
+const Guild = require('../../database/guild.js');
+const User = require('../../database/user.js');
+const { channels, emojis } = require('../../config.js');
+const { GiveAchievement } = require('../../func/games/giveAch.js');
 
 module.exports = {
 	name: Events.InteractionCreate,

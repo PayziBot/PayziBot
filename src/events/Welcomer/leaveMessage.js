@@ -1,6 +1,6 @@
 const { Events } = require('discord.js');
-const Guild = require('../database/guild.js');
-const { replaceVars } = require('../func/system/variables.js');
+const Guild = require('../../database/guild.js');
+const { replaceVars } = require('../../func/system/variables.js');
 
 module.exports = {
 	name: Events.GuildMemberRemove,

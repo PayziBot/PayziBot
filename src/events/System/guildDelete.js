@@ -1,5 +1,5 @@
 const { Events, EmbedBuilder } = require('discord.js');
-const { channels, colors } = require('../config.js');
+const { channels, colors } = require('../../config.js');
 
 module.exports = {
 	name: Events.GuildDelete,

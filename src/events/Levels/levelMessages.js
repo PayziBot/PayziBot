@@ -1,8 +1,8 @@
 const { Events } = require('discord.js');
-const { getLevelGuild, getLevelUserByGuild, MathNextLevel, putLevelUser, getRolesByLevelRange } = require('../database/levels.js');
+const { getLevelGuild, getLevelUserByGuild, MathNextLevel, putLevelUser, getRolesByLevelRange } = require('../../database/levels.js');
 const { randomInt } = require('crypto');
-const { GiveAchievement } = require('../func/games/giveAch.js');
-const Guild = require('../database/guild.js');
+const { GiveAchievement } = require('../../func/games/giveAch.js');
+const Guild = require('../../database/guild.js');
 
 function giveRole(message, role, level) {
 	if (role == undefined) return;

@@ -1,8 +1,8 @@
 const { Events } = require('discord.js');
-const Giveaway = require('../database/giveaway.js');
-const { buildActiveMessage, buildControlMessage, buildListMessage, PAGE_SIZE, endGiveaway, rerollGiveaway } = require('../func/giveaways/manager.js');
-const { getLevelUserByGuild } = require('../database/levels.js');
-const { emojis } = require('../config.js');
+const Giveaway = require('../../database/giveaway.js');
+const { buildActiveMessage, buildControlMessage, buildListMessage, PAGE_SIZE, endGiveaway, rerollGiveaway } = require('../../func/giveaways/manager.js');
+const { getLevelUserByGuild } = require('../../database/levels.js');
+const { emojis } = require('../../config.js');
 
 module.exports = {
 	name: Events.InteractionCreate,
