@@ -53,8 +53,8 @@ module.exports = {
     ),
   async execute(interaction, guild) {
     await interaction.deferReply();
-    if(interaction.options.getSubcommand() === 'overview') {
-      if(guild.autoreact.channelID == '-1' && guild.autoreact.reacts.length == 0) return interaction.followUp(`${emojis.error} | Автореактинг выключен!`);
+    if (interaction.options.getSubcommand() === 'overview') {
+      if (guild.autoreact.channelID == '-1' && guild.autoreact.reacts.length == 0) return interaction.followUp(`${emojis.error} | Автореактинг выключен!`);
       interaction.followUp(`${emojis.success} | Автореактинг **включён** в канале <#${guild.autoreact.channelID}> в ${guild.autoreact.mode === 'lineal' ? 'линейном' : 'случайном'} порядке с реакциями: ${guild.autoreact.reacts.join(', ')}`)
     } else if (interaction.options.getSubcommand() === 'off') {
       if (guild.autoreact.channelID == '-1' && guild.autoreact.reacts.length == 0) return interaction.followUp(`${emojis.error} | Я думаю, автореактинг и так выключен...`)
@@ -68,13 +68,13 @@ module.exports = {
       mode = interaction.options.getString('порядок') || 'lineal';
       reacts = text.split(' ');
 
-      if(reacts.length > 20) return interaction.followUp(`${emojis.error} | Я не смогу поставить больше 20 реакций на сообщение!`);
+      if (reacts.length > 20) return interaction.followUp(`${emojis.error} | Я не смогу поставить больше 20 реакций на сообщение!`);
 
       if (!channel.permissionsFor(interaction.guild.members.me).has(['AddReactions', 'ViewChannel'])) return interaction.followUp(`${emojis.error} | Для установки реакций мне необходимо иметь права \`Добавлять реакции\` и \`Просматривать канал\` в выбранном канале!`)
 
       for (reaction of reacts) {
         const isUnicodeEmoji = /^(\p{Emoji_Presentation}|\p{Extended_Pictographic})/u.test(reaction);
-			  const isDiscordEmoji = /^<a?:\w+:\d+>$/.test(reaction);
+        const isDiscordEmoji = /^<a?:\w+:\d+>$/.test(reaction);
 
         if (!isUnicodeEmoji && !isDiscordEmoji) {
           return interaction.followUp(`${emojis.error} | Я думаю \`${reaction}\` не является эмодзи...`)
@@ -91,8 +91,8 @@ module.exports = {
       guild.autoreact.mode = mode;
       guild.save()
       interaction.followUp(`${emojis.success} Автореактинг успешно включён в канале <#${channel.id}> в ${mode === 'lineal' ? 'линейном' : 'случайном'} порядке с реакциями: ${reacts.join(', ')}`)
-      index = interaction.client.autoreactChannels.indexOf(channel.id);
-      if (interaction.client.autoreactChannels !== -1) {
+      const index = interaction.client.autoreactChannels.indexOf(channel.id);
+      if (index !== -1) {
         interaction.client.autoreactChannels.splice(index, 1);
       }
     }
