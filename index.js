@@ -21,7 +21,7 @@ const client = new Client({
 	],
 	presence: {
 		status: 'online',
-		activities: [{ name: '📗 payzibot.app', type: ActivityType.Custom }],
+		activities: [{ name: '🍏 payzibot.app', type: ActivityType.Custom }],
 	},
 });
 
