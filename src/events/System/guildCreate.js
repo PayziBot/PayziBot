@@ -5,7 +5,8 @@ const {
   ButtonBuilder,
   ButtonStyle,
 } = require("discord.js");
-const { channels, colors } = require("../../config.js");
+const { channels, colors, emojis } = require("../../config.js");
+const Guild = require('../../database/guild.js');
 
 module.exports = {
   name: Events.GuildCreate,
@@ -26,6 +27,12 @@ module.exports = {
         text: `ID: ${guild.id}`,
       });
     client.channels.cache.get(channels.serverLogs).send({ embeds: [embed] });
+
+    const existingGuild = await Guild.findOne({ guildID: guild.id });
+    if (!existingGuild) {
+      await Guild.create({ guildID: guild.id });
+      client.logsManager.sendDbLog(`${emojis.announcement} | Сервер ${guild.name}(${guild.id}) успешно был добавлен в MongoDB при добавлении бота на сервер`);
+    }
 
     if (guild.members.me.permissions.has("SendMessages")) {
       const channel = await guild.channels.cache.find(
