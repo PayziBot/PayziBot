@@ -126,10 +126,13 @@ module.exports = {
       if (role.tags?.integrationId || role.managed) return interaction.followUp("Данная роль управляется интеграцией");
       if (role.id == interaction.guild.id) return interaction.reply(`${emojis.error} | Вы не можете установить роль everyone!`);
 
-      if (/\p{Emoji}/u.test(react) == false)
-        return interaction.followUp(
-          `${emojis.error} | Я думаю \`${react}\` не является эмодзи...`
-        );
+      const isUnicodeEmoji = /^(\p{Emoji_Presentation}|\p{Extended_Pictographic})/u.test(react);
+      const isDiscordEmoji = /^<a?:\w+:\d+>$/.test(react);
+
+      if (!isUnicodeEmoji && !isDiscordEmoji) return interaction.followUp(
+        `${emojis.error} | Я думаю \`${react}\` не является эмодзи...`
+      );
+
       if (react.includes("<")) {
         let reaction = react.split(":");
         reaction[2] = reaction[2].slice(0, -1);
