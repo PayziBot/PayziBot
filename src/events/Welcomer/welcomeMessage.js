@@ -9,32 +9,33 @@ module.exports = {
 		const guild = member.guild;
 		const g = await Guild.findOne({ guildID: guild.id });
 		if (!g) return;
-		if (g.welcome.channelID == '-1') return;
+		if (g.welcome.channelID != '-1') {
+			// Получение канала
+			const channel = await client.channels.cache.get(g.welcome.channelID);
+			if (!channel) return;
+			if (channel.guild.id != guild.id) return;
 
-		// Получение канала
-		const channel = await client.channels.cache.get(g.welcome.channelID);
-		if(!channel) return;
-		if (channel.guild.id != guild.id) return;
+			// Отправка сообщения
+			channel.send(replaceVars(g.welcome.welcomeText, { guild, member }));
+		}
 
-		// Отправка сообщения
-		channel.send(replaceVars(g.welcome.welcomeText, { guild, member }));
-		
-		// Проверка ролей
-		if (g.welcome.autoRoleID == '-1') return;
-		const bot = guild.members.me;
-		const role = guild.roles.cache.get(g.welcome.autoRoleID)
-		if (role == undefined) return;
-		if (role.rawPosition >= bot.roles.highest.rawPosition) return;
-		if (bot.permissions.has('ManageRoles') == false) return;
-		if (role.tags?.botId) return;
-		if (role.tags?.premiumSubscriberRole) return;
-		if (role.tags?.integrationId || role.managed) return;
+		if (g.welcome.autoRoleID != '-1') {
+			const bot = guild.members.me;
+			const role = guild.roles.cache.get(g.welcome.autoRoleID)
+			// Проверка ролей
+			if (role == undefined) return;
+			if (role.rawPosition >= bot.roles.highest.rawPosition) return;
+			if (bot.permissions.has('ManageRoles') == false) return;
+			if (role.tags?.botId) return;
+			if (role.tags?.premiumSubscriberRole) return;
+			if (role.tags?.integrationId || role.managed) return;
 
-		// Выдача роли
-		member.roles.add(role, "Автороль").then(() => {
-			return;
-		}).catch(() => {
-			return;
-		});
+			// Выдача роли
+			member.roles.add(role, "Автороль").then(() => {
+				return;
+			}).catch(() => {
+				return;
+			});
+		}
 	},
 };
