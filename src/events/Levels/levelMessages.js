@@ -47,6 +47,7 @@ module.exports = {
 						.replace('{user.id}', message.author.id)
 						.replace('{guild.name}', message.guild.name)
 						.replace('{level}', user.level)
+						.replace('{oldLevel}', user.level-1)
 						.replace('{xp}', user.xp)
 					)
 				}else {
@@ -58,6 +59,7 @@ module.exports = {
 						.replace('{user.id}', message.author.id)
 						.replace('{guild.name}', message.guild.name)
 						.replace('{level}', user.level)
+						.replace('{oldLevel}', user.level-1)
 						.replace('{xp}', user.xp)
 					)
 				}
