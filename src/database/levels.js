@@ -235,7 +235,7 @@ async function removeRoleLevel(guildID, roleID) {
 }
 
 /**
- * Добавление инфорамции о пользователе на сервере
+ * Добавление информации о пользователе на сервере
  * 
  * @param {string} guildID 
  * @param {string} userID 
