@@ -211,6 +211,30 @@ async function addRoleLevel(guildID, roleID, level) {
 }
 
 /**
+ * Удалить роль за уровень
+ * 
+ * @param {string} guildID 
+ * @param {string} roleID
+ */
+async function removeRoleLevel(guildID, roleID) {
+    const guild = await getLevelGuild(guildID);
+    const { roles } = guild;
+
+    const index = roles.findIndex(r => r.roleId === roleID);
+
+    if (index === -1) {
+        return false;
+    }
+
+    roles.splice(index, 1);
+
+    guild.roles = roles;
+    levelsDB.put(guildID, guild);
+
+    return true;
+}
+
+/**
  * Добавление инфорамции о пользователе на сервере
  * 
  * @param {string} guildID 
@@ -270,6 +294,7 @@ module.exports = {
     removeLevelUserByGuild,
     getRolesByLevelRange,
     addRoleLevel,
+    removeRoleLevel,
     setLevelGuildXp,
     setClearLevelsStatus
 }

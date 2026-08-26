@@ -13,7 +13,7 @@
 
 const { SlashCommandBuilder, PermissionFlagsBits, ChannelType, ModalBuilder, TextInputBuilder, TextInputStyle, ButtonBuilder, ButtonStyle, ActionRowBuilder } = require("discord.js");
 const { emojis } = require('../../../config.js');
-const { setLevelGuildXp, setLevelGuildEnabled, resetLevelUser, getLevelGuild, setLevelGuildChannel, getLevelUserByGuild, putLevelUser, MathNextLevel, addRoleLevel, setLevelGuildInterval, setClearLevelsStatus } = require('../../../database/levels.js');
+const { setLevelGuildXp, setLevelGuildEnabled, resetLevelUser, getLevelGuild, setLevelGuildChannel, getLevelUserByGuild, putLevelUser, MathNextLevel, addRoleLevel, removeRoleLevel, setLevelGuildInterval, setClearLevelsStatus } = require('../../../database/levels.js');
 
 module.exports = {
   category: 'settings',
@@ -94,6 +94,16 @@ module.exports = {
             .setMinValue(1)
             .setMaxValue(1000)
             .setRequired(true)))
+    .addSubcommand(subcommand =>
+      subcommand
+        .setName('remove-role-level')
+        .setDescription('Удалить роль за уровень')
+        .addRoleOption((option) =>
+          option
+            .setName('роль')
+            .setDescription('Роль, выдачу которой вы хотите удалить')
+            .setRequired(true)
+        ))
     .addSubcommand(subcommand =>
       subcommand
         .setName('set-xp-range')
@@ -259,6 +269,21 @@ module.exports = {
       await addRoleLevel(interaction.guild.id, role.id, level)
 
       interaction.reply(`${emojis.success} С этого момента роль будет выдаваться всем пользователям, достигшим **${level}** уровня!`)
+
+    // add-role-level - Создать новую роль за уровень
+    } else if (interaction.options.getSubcommand() === 'remove-role-level') {
+
+      if(!g.enabled) return interaction.reply(`${emojis.error} | На сервере отключена система уровней. Для включения используйте команду \`/levels toggle\``);
+
+      const role = interaction.options.getRole('роль');
+
+      bot = interaction.guild.members.me;
+
+      const result = await removeRoleLevel(interaction.guild.id, role.id)
+
+      if(result === false) return interaction.reply(`${emojis.error} Эта роль и так не выдается за достижения новых уровней`)
+
+      interaction.reply(`${emojis.success} С этого момента роль не будет выдаваться пользователям за достижения новых уровней`)
 
       // set-xp-range - Установить диапазон XP для уровней
     } else if (interaction.options.getSubcommand() === 'set-xp-range') {
