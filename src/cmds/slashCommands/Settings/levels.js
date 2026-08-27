@@ -13,7 +13,7 @@
 
 const { SlashCommandBuilder, PermissionFlagsBits, ChannelType, ModalBuilder, TextInputBuilder, TextInputStyle, ButtonBuilder, ButtonStyle, ActionRowBuilder } = require("discord.js");
 const { emojis } = require('../../../config.js');
-const { setLevelGuildXp, setLevelGuildEnabled, resetLevelUser, getLevelGuild, setLevelGuildChannel, getLevelUserByGuild, putLevelUser, MathNextLevel, addRoleLevel, removeRoleLevel, setLevelGuildInterval, setClearLevelsStatus } = require('../../../database/levels.js');
+const { setLevelGuildXp, setLevelGuildEnabled, setLevelGuildMessage, resetLevelUser, getLevelGuild, setLevelGuildChannel, getLevelUserByGuild, putLevelUser, MathNextLevel, addRoleLevel, removeRoleLevel, setLevelGuildInterval, setClearLevelsStatus } = require('../../../database/levels.js');
 
 module.exports = {
   category: 'settings',
@@ -44,7 +44,11 @@ module.exports = {
     .addSubcommand(subcommand =>
       subcommand
         .setName('message')
-        .setDescription('Установить сообщение о новом уровне'))
+        .setDescription('Установить сообщение о новом уровне')
+        .addBooleanOption(option =>
+          option.setName('включить')
+            .setDescription('Включить ли сообщение о новом уровне?')
+            .setRequired(true)))
     .addSubcommand(subcommand =>
       subcommand
         .setName('reset')
@@ -146,7 +150,7 @@ module.exports = {
     if (interaction.options.getSubcommand() === 'overview') {
       
       if(!g.enabled) return interaction.reply(`${emojis.error} | На сервере отключена система уровней. Для включения используйте команду \`/levels toggle\``);
-      interaction.reply(`${emojis.success} | Система уровней **включена**!\n\nИнтервал между начислением опыта: **${g.interval}** секунд\nДиапазон XP за сообщение: от **${g.xp.min}** до **${g.xp.max}** XP\nКанал для оповещений о новом уровне: ${g.channelID != "-1" ? `<#${g.channelID}>` : "**в канал сообщения**"}\nСообщение о новом уровне: \`\`\`${g.message}\`\`\`\nРоли за уровни:\n${g.roles.length > 0 ? g.roles.map(r => `<@&${r.roleId}> (**${r.level}** уровень)`).join(',\n') : "нет ролей"}`)
+      interaction.reply(`${emojis.success} | Система уровней **включена**!\n\nИнтервал между начислением опыта: **${g.interval}** секунд\nДиапазон XP за сообщение: от **${g.xp.min}** до **${g.xp.max}** XP\nКанал для оповещений о новом уровне: ${g.channelID != "-1" ? `<#${g.channelID}>` : "**в канал сообщения**"}\nСообщение о новом уровне **${g.messageEnabled ? "включено" : "выключено"}**: \`\`\`${g.message}\`\`\`\nРоли за уровни:\n${g.roles.length > 0 ? g.roles.map(r => `<@&${r.roleId}> (**${r.level}** уровень)`).join(',\n') : "нет ролей"}`)
 
     // toggle - Включить/Выключить систему уровней
   } else if (interaction.options.getSubcommand() === 'toggle') {
@@ -203,6 +207,14 @@ module.exports = {
     } else if (interaction.options.getSubcommand() === 'message') {
 
       if(!g.enabled) return interaction.reply(`${emojis.error} | На сервере отключена система уровней. Для включения используйте команду \`/levels toggle\``);
+
+      const isEnabled = interaction.options.getBoolean('включить');
+
+      if(!isEnabled) {
+        await setLevelGuildMessage(interaction.guild.id, isEnabled);
+        interaction.reply(`${emojis.success} Сообщение о новом уровне отключено!`)
+        return;
+      }
 
       const modal = new ModalBuilder()
         .setCustomId('level')

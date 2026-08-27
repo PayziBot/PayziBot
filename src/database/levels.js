@@ -99,11 +99,13 @@ async function setLevelGuildChannel(guildID, channelID) {
  * Установить сообщения оповещений о новом уровне
  * 
  * @param {string} guildID 
+ * @param {string} enabled
  * @param {string} message
  */
-async function setLevelGuildMessage(guildID, message) {
+async function setLevelGuildMessage(guildID, enabled, message) {
     const guild = await getLevelGuild(guildID);
-    guild.message = message;
+    guild.messageEnabled = enabled;
+    if(message) guild.message = message;
     levelsDB.put(guildID, guild);
 
     return true;
